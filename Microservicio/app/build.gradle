@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'Microservicio'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.vertx:vertx-core:4.3.3'
+    implementation 'io.vertx:vertx-rx-java3:4.3.3'
+    implementation 'io.vertx:vertx-web:4.3.3'
+    implementation 'io.vertx:vertx-web-client:4.3.3'
+    implementation 'io.vertx:vertx-mongo-client:4.3.3'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.3'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+application {
+    mainClassName = 'com.masmovil.developers.infrastructure.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
