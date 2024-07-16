@@ -24,6 +24,9 @@ paths:
               $ref: "#/definitions/Developer"
         404:
           $ref: "#/responses/NotFound"
+        500:
+          $ref: "#/responses/InternalError"
+
   /developers:
     get:
       summary: "Get list of developers"
@@ -41,6 +44,9 @@ paths:
               $ref: "#/definitions/Developer"
         404:
           $ref: "#/responses/NotFound"
+        500:
+          $ref: "#/responses/InternalError"
+
 parameters:
   NameQuery:
     name: "name"
@@ -57,6 +63,7 @@ parameters:
     in: "query"
     type: "string"
     required: false
+
 definitions:
   Developer:
     type: "object"
@@ -66,14 +73,17 @@ definitions:
       - "skills"
     properties:
       id:
-        type: "object"
-        example: "12345"
+        type: "string"
+        example: "11a8d6a3-0470-4e2a-b8e9-85c469c4a220"
       name:
-        type: "object"
+        type: "string"
         example: "John Doe"
       skills:
         type: "array"
-        example: "Java, Python"
+        items:
+          type: "string"
+        example: ["Java", "Python"]
+
 responses:
   InternalError:
     description: "Internal server error"
