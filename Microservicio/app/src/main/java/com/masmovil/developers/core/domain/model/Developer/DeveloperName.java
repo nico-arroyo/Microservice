@@ -1,4 +1,4 @@
-package com.masmovil.developers.core.domain.model.Developer;
+package com.masmovil.developers.core.domain.model.developer;
 
 import io.vertx.core.json.JsonObject;
 
@@ -7,17 +7,20 @@ public class DeveloperName {
     private final String firstName;
     private final String lastName;
 
-    private DeveloperName(String name, String lastName) {
-        this.firstName = name;
+    private DeveloperName(String firstName, String lastName) throws IllegalArgumentException {
+        if (firstName == null || firstName.isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty");
+        }
+        if (lastName == null || lastName.isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty");
+        }
+
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public static DeveloperName of(String name, String lastName) throws IllegalArgumentException {
-        if (name != null && !name.isEmpty()) {
-            return new DeveloperName(name, lastName);
-        } else {
-            throw new IllegalArgumentException("Name cannot be empty");
-        }
+        return new DeveloperName(name, lastName);
     }
 
     public JsonObject toJson() {
@@ -33,15 +36,23 @@ public class DeveloperName {
         );
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!this.getClass().equals(o.getClass())) {
+            return false;
+        }
+        DeveloperName other = (DeveloperName) o;
+        return this.firstName.equals(other.firstName) && this.lastName.equals(other.lastName);
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getFullName() {
-        return firstName + " " + lastName;
     }
 }
