@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  title: "MasMovil Developers API"
+  description: "API for managing developers and squads"
+  version: "1.0.0"
+host: "localhost:8080"
+schemes:
+  - "http"
+
+paths:
+  /developers/{name}:
+    get:
+      summary: "Find developer by name"
+      description: "Returns a single developer based on name"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/NameQuery"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            items:
+              $ref: "#/definitions/Developer"
+        404:
+          $ref: "#/responses/NotFound"
+  /developers:
+    get:
+      summary: "Get list of developers"
+      description: "Returns a list of developers based on query parameters"
+      produces:
+        - "application/json"
+      parameters:
+        - $ref: "#/parameters/NameQuery"
+        - $ref: "#/parameters/SkillsQuery"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            items:
+              $ref: "#/definitions/Developer"
+        404:
+          $ref: "#/responses/NotFound"
+parameters:
+  NameQuery:
+    name: "name"
+    in: "query"
+    type: "string"
+    required: false
+  IdQuery:
+    name: "id"
+    in: "query"
+    type: "string"
+    required: false
+  SkillsQuery:
+    name: "skills"
+    in: "query"
+    type: "string"
+    required: false
+definitions:
+  Developer:
+    type: "object"
+    required:
+      - "id"
+      - "name"
+      - "skills"
+    properties:
+      id:
+        type: "object"
+        example: "12345"
+      name:
+        type: "object"
+        example: "John Doe"
+      skills:
+        type: "array"
+        example: "Java, Python"
+responses:
+  InternalError:
+    description: "Internal server error"
+    schema:
+      type: "object"
+      properties:
+        error:
+          type: "string"
+  NotFound:
+    description: "Not found"
+    schema:
+      type: "object"
+      properties:
+        error:
+          type: "string"
