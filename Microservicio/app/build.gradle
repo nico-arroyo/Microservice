@@ -17,8 +17,12 @@ dependencies {
     implementation 'io.vertx:vertx-web-client:4.3.3'
     implementation 'io.vertx:vertx-mongo-client:4.3.3'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.3'
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
+    testImplementation 'io.vertx:vertx-junit5:4.3.3'
+    testImplementation 'io.vertx:vertx-rx-java3:4.3.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
 application {
